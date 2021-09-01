@@ -23,7 +23,7 @@ class UserReview(generics.ListAPIView):
 
 
 class ReviewCreate(generics.CreateAPIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    #permission_classes = [IsAuthenticatedOrReadOnly]
     throttle_classes = [ReviewCreateThrottle]
     serializer_class = ReviewSerializer
 
@@ -71,14 +71,14 @@ class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class OnlineLibraryVS(viewsets.ModelViewSet):
-    permission_classes = [IsAdminOrReadOnly]
+    #permission_classes = [IsAdminOrReadOnly]
 
     queryset = OnlineLibrary.objects.all()
     serializer_class = OnlineLibrarySerializer
 
 
 class OnlineLibraryListAV(APIView):
-    permission_classes = [IsAdminOrReadOnly]
+    #permission_classes = [IsAdminOrReadOnly]
 
     def get(self, request):
         platform = OnlineLibrary.objects.all() #complex data
@@ -95,7 +95,7 @@ class OnlineLibraryListAV(APIView):
 
 
 class OnlineLibraryDetailAV(APIView):
-    permission_classes = [IsAdminOrReadOnly]
+    #permission_classes = [IsAdminOrReadOnly]
 
     serializer = OnlineLibrarySerializer()
     def get(self, request,pk):
@@ -130,7 +130,7 @@ class BookList(generics.ListAPIView):
   
 
 class BookAV(APIView):
-    permission_classes = [IsAdminOrReadOnly]
+    #permission_classes = [IsAdminOrReadOnly]
 
     def get(self, request):
         books = Book.objects.all() #complex data
@@ -147,7 +147,7 @@ class BookAV(APIView):
 
 
 class BookDetailAV(APIView):
-    permission_classes = [IsAdminOrReadOnly]
+    #permission_classes = [IsAdminOrReadOnly]
 
     def get(self, request,pk):
         try:
