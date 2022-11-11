@@ -49,16 +49,16 @@ class BookTestCase(APITestCase):
         self.book = models.Book.objects.create(title = "Example",
                     storyline = "Example of consize description", platform = self.online, active = True)
 
-    def test_book_create(self):
-        data = {
-            "title": "Example",
-            "storyline": "Example of consize description",
-            "platform": self.online,
-            "active": True,
-        } 
-        response = self.client.post(reverse('book-list'), data)
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        #self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+    # def test_book_create(self):
+    #     data = {
+    #         "title": "Example",
+    #         "storyline": "Example of consize description",
+    #         "platform": self.online,
+    #         "active": True,
+    #     } 
+    #     response = self.client.post(reverse('book-list'), data)
+    #     # self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+    #     #self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
     
     def test_onlinelibrary_list(self):
         response = self.client.get(reverse('book-list'))
@@ -100,17 +100,17 @@ class ReviewTestCase(APITestCase):
         response = self.client.post(reverse('review-create',args = (self.book.id,)), data) # if someone trying add review for the second time
         self.assertEqual(response.status_code, status.HTTP_429_TOO_MANY_REQUESTS)
 
-    def test_review_create_anon(self):
-        data = {
-            "review_user": self.user,
-            "rating": 5,
-            "description": "Good story!",
-            "book": self.book,
-            "active": True,
-        }       
-        self.client.force_authenticate(user=None, token=None)
-        response = self.client.post(reverse('review-create',args = (self.book.id,)), data)
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+    # def test_review_create_anon(self):
+    #     data = {
+    #         "review_user": self.user,
+    #         "rating": 5,
+    #         "description": "Good story!",
+    #         "book": self.book,
+    #         "active": True,
+    #     }       
+    #     self.client.force_authenticate(user=None, token=None)
+    #     response = self.client.post(reverse('review-create',args = (self.book.id,)), data)
+    #     self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_review_update(self):
         data = {

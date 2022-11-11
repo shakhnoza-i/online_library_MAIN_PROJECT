@@ -89,7 +89,7 @@ class OnlineLibraryListAV(APIView):
         serializer = OnlineLibrarySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors)
 
@@ -98,7 +98,7 @@ class OnlineLibraryDetailAV(APIView):
     #permission_classes = [IsAdminOrReadOnly]
 
     serializer = OnlineLibrarySerializer()
-    def get(self, request,pk):
+    def get(self, request, pk):
         try:
             book = OnlineLibrary.objects.get(pk=pk)
         except OnlineLibrary.DoesNotExist:
@@ -108,6 +108,7 @@ class OnlineLibraryDetailAV(APIView):
 
     def put(self, request,pk):
         book = OnlineLibrary.objects.get(pk=pk)
+        serializer = OnlineLibrarySerializer(book)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
